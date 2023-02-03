@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Calendar</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #008080;
+        }
+        .parent-container{
+            width: 500px;
+            height: 450px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+        }
+        h2{
+            font-family: cursive;
+            padding-left: 8px;
+        }
+
+        .grid-container{
+            margin-top: 3%;
+            display: grid;
+            grid-template-columns: repeat(7, 50px);
+            grid-template-rows: repeat(6, 50px);
+            grid-gap: 15px 17px;
+
+        }
+        .cell-day{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: context-menu;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: 600;
+            
+        }
+
+        .date{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 25px;
+            /* border: 2px solid black; */
+            cursor: pointer;
+            font-size: 20px;
+            font-family: cursive;
+            background-color: #b6dcdc;
+        }
+        .date1{
+            grid-column: 4;
+
+        }
+        .date:hover{
+            background-color: #8080808c;
+        }
+
+       .click{
+            background-color: #008080;
+       }
+    </style>
+</head>
+<body>
+    <div class="parent-container">
+        <h2>February 2023</h2>
+        <div class="grid-container">
+            <!-- Days of the day -->
+            <div class="cell-day">Sun</div>
+            <div class="cell-day">Mon</div>
+            <div class="cell-day">Tue</div>
+            <div class="cell-day">Wed</div>
+            <div class="cell-day">Thur</div>
+            <div class="cell-day">Fri</div>
+            <div class="cell-day">Sat</div>
+
+        </div>
+    </div>
+
+<!-- Javascript -->
+    <script>
+
+        // get grid container to insert elements inside it
+        let getCalendarContainer = document.querySelector(".grid-container")
+
+        // using for loop to create and insert elements inside the grid-container
+        for(let i = 1; i<29; i++){
+            getCalendarContainer.insertAdjacentHTML("beforeend", `<div class='date date${i}'>${i}</div>`)
+        }
+
+        // get date classes to add background color when the click event is generated
+        let getDates = document.querySelectorAll(".date")
+
+        let count = 0; // created a vriable to work as a condition
+        let saveIndex = ""; // created a variable to store clicked index
+        
+        for (let i = 0; i<getDates.length; i++){
+            
+            getDates[i].addEventListener("click", function(){
+                // it runs when count variable value is 0
+
+                if(count == 0){
+                    getDates[i].style.background = "teal" // add custom color
+                    
+                    // this condition is neccesity else eat error:😋 try it one time
+                    if(saveIndex != ""){
+                        getDates[saveIndex].style.background = "#b6dcdc" // back to normal
+
+                    }
+                    
+                    saveIndex = i; // storeIndex to remove background color when go in else part
+                    count++; // here increment 1 now it can go in else part
+                }
+
+                // it runs when count variable value is 1
+                else{
+                    getDates[saveIndex].style.background = "#b6dcdc" // back to normal
+                    getDates[i].style.background = "teal" // give custom color
+                    saveIndex = i;// storeIndex to remove background color when go in if part
+                    count = 0; // here count value is 0 now it can go in if part
+                }
+
+            })
+        }
+    </script>
+</body>
+</html>
