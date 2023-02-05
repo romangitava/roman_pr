@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CallBack Hell</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: wheat;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+        .parent-container{
+            width: 375px;
+            height: 520px;
+            background-color: white;
+            border-radius: 10px;
+            padding:  15px 12px;
+            box-shadow: -4px 4px 20px 5px #00000033;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow-y: scroll;
+
+        }
+        .parent-container::-webkit-scrollbar {
+            display: none;
+        }
+        input{
+            width: 98%;
+            height: 80px;
+            border-radius: 5px;
+            border: 1px solid black;
+            outline: none;
+            padding: 5px 20px;
+            font-family: cursive;
+            font-size: 18px;
+            margin-bottom: 5%;
+            position: sticky;
+            top: 0;
+        }
+        .character-container{
+            width: 95%;
+        }
+        .character{
+            display: flex;
+            border-radius: 10px;
+            margin-bottom: 5%;
+            cursor: pointer;
+            height: 80px;
+        }
+        .character img{
+            width: 25%;
+            height: 90px;
+            border-radius: 5px;
+            background-size: contain;
+            background-repeat: no-repeat;            
+        }
+        .character p{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 2%;
+            font-size: 18px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .follow{
+            height: 30%;
+            width: 30%;
+            background-color: wheat;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: cursive;
+            font-weight: bolder;
+            letter-spacing: 0.5px;
+            padding: 2px 5px;
+        }
+        .follow:hover{
+            background-color: rgb(220, 200, 164);
+            
+        }
+
+        @media (max-width:405px) {
+            .parent-container{
+                width: 320px;
+
+            }
+            .character img{
+                width: 29%;
+                height: 80px;
+            }
+        }
+
+        @media (max-width:320px) {
+            .parent-container{
+                width: 280px;
+                height: 450px;
+            }
+            /* .character-con */
+            .character p{
+                font-size: 15px;
+                font-weight: bolder;
+            }
+            .character .follow{
+                font-size: 10px;
+                font-weight: bolder;
+
+            }
+            .character img{
+                height: 80px;
+
+            }
+        }
+
+        @media (max-width:290px) {
+            .parent-container{
+                width: 250px;
+                height: 430px;
+            }
+            .character img{
+                height: 70px;
+            }
+        }
+
+        @media (max-width:260px) {
+            .parent-container{
+                width: 220px;
+                height: 430px;
+            }
+            .character img{
+                height: 70px;
+                width: 40%;
+            }
+            .character p{
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width:230px) {
+            .parent-container{
+                width: 200px;
+                height: 400px;
+            }
+            .character img{
+                height: 60px;
+                width: 50%;
+            }
+            .character p{
+                font-size: 10px;
+                font-weight: bolder;
+            }
+            .character .follow{
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parent-container">
+        <input type="text" placeholder="🔍 Search Cartoon Characters" onkeyup="search()">
+        <div class="character-container">
+            <div class="character">
+                <img src="imgs/Bella.png">
+                <p>Belle: 'Walt Disney Pictures'</p>
+                <button class="follow">Follow</button>
+            </div>
+            <div class="character">
+                <img src="imgs/Kingdaddy.png">
+                <p>King Daddy: 'King Google'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+            <div class="character">
+                <img src="imgs/Minnie Mouse.png">
+                <p>Minnie: 'Walt Disney Pictures'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+            <div class="character">
+                <img src="imgs/Jne.png">
+                <p>Jane: 'Walt Disney Wonderland'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/Whitedaddy.png">
+                <p>Rock Daddy: 'King Google'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/Jasmine.png">
+                <p>Jasmine: 'Walt Disney Wonderland'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/KIara.png">
+                <p>Kiara: 'Walt Disney Wonderland'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/Chintu.png">
+                <p>Chintu: 'Sonic Nicklodean World'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/veer.png">
+                <p>Veer: 'Sonic Nicklodean World'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/Elsa.png">
+                <p>Elsa: 'Walt Disney Wonderland'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/roman.jpg">
+                <p>Roman: 'Roman Own Empire'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/Belle.png">
+                <p>Belle: 'Walt Disney Wonderland'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/Anna.png">
+                <p>Anna: 'Vivo Kids Most Popular'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/VanellopeVon.png">
+                <p>Vanellope: 'Walt Disney Wonderland'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+
+            <div class="character">
+                <img src="imgs/Tinker Bell.png">
+                <p>Tinker Bell: 'Animated Cartoon'</p>
+                <button class="follow">Follow</button>
+
+            </div>
+        </div>
+    </div>
+    
+    <script>
+
+        // ____________________________Search Engine Logic Start__________________
+        function search(){
+            const getInputBox = document.querySelector("input").value.toLowerCase()
+            const getCharacters = document.querySelectorAll(".character")
+            
+            for(let i = 0; i<getCharacters.length; i++){
+                let match = getCharacters[i].querySelector("p")
+
+                if(match){
+                    let textValue = match.innerHTML || match.textContent
+
+                    if(textValue.toLowerCase().indexOf(getInputBox) > -1){
+                        getCharacters[i].style.display = ""
+                    }
+                    else{
+                        getCharacters[i].style.display = "none"
+                    }
+                }
+                
+            }
+        }
+
+
+        //_________________________Search Engine Logic end____________________________
+        
+
+        // ______________________Following logic start____________________________
+        let getFollowButton = document.querySelectorAll(".follow")
+
+        // using for loop to know where click event is generated
+        for(let i = 0; i<getFollowButton.length; i++){
+            getFollowButton[i].addEventListener("click", function(){
+
+                // condition if user wants follow then run if statement
+                if(getFollowButton[i].innerHTML == 'Follow'){
+                    getFollowButton[i].innerHTML = 'Following'
+                    getFollowButton[i].style.background = "#f4ce88"
+                }
+                
+                // if user wants unfollow then run else statement
+                else{
+                    getFollowButton[i].innerHTML = 'Follow'
+                    getFollowButton[i].style.background = "wheat"
+
+                }
+            })
+        }
+    </script>
+</body>
+</html>
